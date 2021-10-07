@@ -20,11 +20,12 @@ from __future__ import division
 import logging
 import json
 import re
+from urllib.parse import quote_plus
 from datetime import datetime, timedelta
 
 # --- AEL packages ---
 from ael import constants, settings
-from ael.utils import io, net
+from ael.utils import io, net, kodi
 from ael.scrapers import Scraper
 
 logger = logging.getLogger(__name__)
@@ -167,7 +168,7 @@ class GoogleImageSearch(Scraper):
         elif asset_info_id == constants.ASSET_TITLE_ID:
             asset_info_term = 'title+screen'
         else:
-            asset_info_term = asset_info.fname_infix
+            asset_info_term = asset_info_id
         
         url = candidate['url'].format(asset_info_term)
         json_data = self._retrieve_URL_as_JSON(url, status_dic)
