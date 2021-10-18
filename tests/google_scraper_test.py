@@ -1,16 +1,23 @@
-import unittest, mock, os, sys, re
+import unittest, os
+import unittest.mock
+from unittest.mock import MagicMock, patch
 
-from mock import *
-from mock import ANY
-from tests.fakes import *
-import xml.etree.ElementTree as ET
+import json
+import logging
 
-from resources.utils import *
-from resources.net_IO import *
-from resources.scrap import *
-from resources.objects import *
-from resources.constants import *
-        
+from fakes import FakeProgressDialog, random_string
+
+logging.basicConfig(format = '%(asctime)s %(module)s %(levelname)s: %(message)s',
+                datefmt = '%m/%d/%Y %I:%M:%S %p', level = logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+from resources.lib.scraper import GoogleImageSearch
+from ael.scrapers import ScrapeStrategy, ScraperSettings
+
+from ael.api import ROMObj
+from ael import constants
+from ael.utils import net
+
 def read_file(path):
     with open(path, 'r') as f:
         return f.read()
@@ -18,21 +25,15 @@ def read_file(path):
 def mocked_google(url, url_log=None):
 
     mocked_html = ''
-
     if '&tbm=isch' in url:
         mocked_html = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'google_result.html'))
-
     if 'youtube.com' in url:
         mocked_html = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'youtube_result.html'))
-
     if mocked_html == '':
-        return net_get_URL(url, url)
+        return net.get_URL(url, url)
 
     print('reading mocked data from file: {}'.format(mocked_html))
     return read_file(mocked_html).decode('utf-8'), 200
-
-
-xbmc.log = print_log
 
 class Test_google_scrapers(unittest.TestCase):
     
@@ -41,9 +42,7 @@ class Test_google_scrapers(unittest.TestCase):
     TEST_ASSETS_DIR = ''
 
     @classmethod
-    def setUpClass(cls):
-        set_log_level(LOG_DEBUG)
-        
+    def setUpClass(cls):        
         cls.TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         cls.ROOT_DIR = os.path.abspath(os.path.join(cls.TEST_DIR, os.pardir))
         cls.TEST_ASSETS_DIR = os.path.abspath(os.path.join(cls.TEST_DIR,'assets'))
@@ -53,67 +52,79 @@ class Test_google_scrapers(unittest.TestCase):
         print('TEST ASSETS DIR: {}'.format(cls.TEST_ASSETS_DIR))
         print('---------------------------------------------------------------------------')
 
-    def get_test_settings(self):
-        settings = {}
-        settings['scan_metadata_policy'] = 3 # OnlineScraper only
-        settings['scan_asset_policy'] = 0
-        settings['metadata_scraper_mode'] = 1
-        settings['asset_scraper_mode'] = 1
-        settings['scan_clean_tags'] = True
-        settings['scan_ignore_scrap_title'] = False
-        settings['scraper_metadata'] = 0 # NullScraper
-        settings['scraper_mobygames_apikey'] = 'abc123'
-        settings['escape_romfile'] = False
-        settings['scraper_cache_dir'] = self.TEST_ASSETS_DIR
-
-        return settings
-
-    @patch('resources.scrap.net_get_URL', side_effect = mocked_google)
-    def test_scraping_assets_for_game(self, mock_url_downloader):
-
+    @patch('resources.lib.scraper.net.get_URL', side_effect = mocked_google)
+    @patch('resources.lib.scraper.net.download_img')
+    @patch('resources.lib.scraper.io.FileName.scanFilesInPath', autospec=True)
+    @patch('ael.api.client_get_rom')
+    def test_scraping_assets_for_game(self, api_rom_mock: MagicMock, scanner_mock, mock_img_downloader, mock_url_downloader):    
         # arrange
-        settings = self.get_test_settings()
-        status_dic = {}
-        status_dic['status'] = True
-        target = GoogleImageSearch(settings)
-                
-        asset_to_scrape = g_assetFactory.get_asset_info(ASSET_BOXFRONT_ID)
-        f = FakeFile('/roms/castlevania.nes')
-        platform = 'Nintendo NES'
-
-        # act
-        candidates = target.get_candidates('castlevania', f, f, platform, status_dic)
-        target.set_candidate(f, platform, candidates[0])
-
-        # act
-        actual = target.get_assets(asset_to_scrape, status_dic)
-                
-        # assert
-        self.assertTrue(actual)     
-        self.assertEqual(100, len(actual))
-        for a in actual:        
-            print('{} URL: {}'.format(a['display_name'].encode('utf-8'), a['url'].encode('utf-8') ))
-
-    @patch('resources.scrap.net_get_URL', side_effect = mocked_google)
-    def test_scraping_trailer_assets_for_game(self, mock_url_downloader):
-
-        # arrange
-        settings = self.get_test_settings()
-        status_dic = {}
-        status_dic['status'] = True
-        target = YouTubeSearch(settings)
+        settings = ScraperSettings()
+        settings.scrape_metadata_policy = constants.SCRAPE_ACTION_NONE
+        settings.scrape_assets_policy = constants.SCRAPE_POLICY_SCRAPE_ONLY
+        settings.asset_IDs_to_scrape = [constants.ASSET_BOXFRONT_ID]
+                        
+        rom_id = random_string(5)
+        rom = ROMObj({
+            'id': rom_id,
+            'filename': Test_google_scrapers.TEST_ASSETS_DIR + '\\castlevania.zip',
+            'platform': 'Nintendo NES',
+            'assets': {key: '' for key in constants.ROM_ASSET_ID_LIST},
+            'asset_paths': {
+                constants.ASSET_BOXFRONT_ID: '/fronts/'
+            }
+        })
+        api_rom_mock.return_value = rom
         
-        asset_to_scrape = g_assetFactory.get_asset_info(ASSET_TRAILER_ID)
-        f = FakeFile('/roms/castlevania.nes')
-        platform = 'Nintendo NES'
+        target = ScrapeStrategy(None, 0, settings, GoogleImageSearch(), FakeProgressDialog())
 
         # act
-        candidates = target.get_candidates('castlevania', f, f, platform, status_dic)
-        target.set_candidate(f, platform, candidates[0])
-        actual = target.get_assets(asset_to_scrape, status_dic)
+        actual = target.process_single_rom(rom_id)
                 
         # assert
-        self.assertTrue(actual)     
-        self.assertEqual(20, len(actual))
-        for a in actual:        
-            print('{} URL: {}'.format(a['display_name'].encode('utf-8'), a['url'].encode('utf-8') ))
+        self.assertTrue(actual) 
+        logger.info(actual.get_data_dic()) 
+        
+        self.assertTrue(actual.entity_data['assets'][constants.ASSET_BOXFRONT_ID], 'No front defined')
+        
+    # @patch('resources.lib.scraper.net.get_URL', side_effect = mocked_google)
+    # @patch('resources.lib.scraper.net.download_img')
+    # @patch('ael.api.client_get_rom')
+    # def test_scraping_trailer_assets_for_game(self, api_rom_mock: MagicMock, mock_img_downloader, mock_url_downloader):    
+    #     # arrange
+    #     settings = ScraperSettings()
+    #     settings.scrape_metadata_policy = constants.SCRAPE_ACTION_NONE
+    #     settings.scrape_assets_policy = constants.SCRAPE_POLICY_SCRAPE_ONLY
+    #     settings.asset_IDs_to_scrape = [constants.ASSET_BOXFRONT_ID]
+                        
+    #     rom_id = random_string(5)
+    #     rom = ROMObj({
+    #         'id': rom_id,
+    #         'filename': Test_google_scrapers.TEST_ASSETS_DIR + '\\castlevania.zip',
+    #         'platform': 'Nintendo NES'
+    #     })
+    #     api_rom_mock.return_value = rom
+        
+    #     target = ScrapeStrategy(None, 0, settings, YouTubeSearch(), FakeProgressDialog())
+
+    #     # act
+    #     actual = target.process_single_rom(rom_id)
+                
+    #     settings = self.get_test_settings()
+    #     status_dic = {}
+    #     status_dic['status'] = True
+    #     target = YouTubeSearch(settings)
+        
+    #     asset_to_scrape = g_assetFactory.get_asset_info(ASSET_TRAILER_ID)
+    #     f = FakeFile('/roms/castlevania.nes')
+    #     platform = 'Nintendo NES'
+
+    #     # act
+    #     candidates = target.get_candidates('castlevania', f, f, platform, status_dic)
+    #     target.set_candidate(f, platform, candidates[0])
+    #     actual = target.get_assets(asset_to_scrape, status_dic)
+                
+    #     # assert
+    #     self.assertTrue(actual)     
+    #     self.assertEqual(20, len(actual))
+    #     for a in actual:        
+    #         print('{} URL: {}'.format(a['display_name'].encode('utf-8'), a['url'].encode('utf-8') ))
