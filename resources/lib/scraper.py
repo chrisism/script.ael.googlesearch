@@ -67,7 +67,7 @@ class GoogleImageSearch(Scraper):
 
     def check_before_scraping(self, status_dic): return
 
-    def get_candidates(self, search_term, rom_FN, rom_checksums_FN, platform, status_dic):
+    def get_candidates(self, search_term, rom_FN:io.FileName, rom_checksums_FN, platform, status_dic):
         # --- If scraper is disabled return immediately and silently ---
         if self.scraper_disabled:
             # If the scraper is disabled return None and do not mark error in status_dic.
@@ -242,10 +242,10 @@ class GoogleImageSearch(Scraper):
         results['images'] = []
 
         ## looking for <script nonce="xoK1dLqTFF+mzuRvsjh/Xg">AF_initDataCallbackAF_initDataCallback({key: 'ds:2', isError:  false , hash: '3', data:[..]
-        hits = re.findall(r"<script nonce=\".*\">AF_initDataCallback\({key: '.*?', isError:  false , hash: '.*?', data:(.*?), sideChannel: {}}\);</script>", page_data_raw, flags=re.S)
+        hits = re.findall(r"<script nonce=\".*\">AF_initDataCallback\({key: 'ds:\d',( isError:  false ,)? hash: '.*?', data:(.*?), sideChannel: {}}\);</script>", page_data_raw, flags=re.S)
         if len(hits) == 0: return None
-                        
-        hit = hits[::-1][0]
+        
+        hit = hits[-1][-1]
         hit = '{"data": ' + hit + '}'
         try:
             return json.loads(hit)

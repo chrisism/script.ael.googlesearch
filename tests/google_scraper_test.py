@@ -33,7 +33,7 @@ def mocked_google(url, url_log=None):
         return net.get_URL(url, url)
 
     print('reading mocked data from file: {}'.format(mocked_html))
-    return read_file(mocked_html).decode('utf-8'), 200
+    return read_file(mocked_html), 200
 
 class Test_google_scrapers(unittest.TestCase):
     
