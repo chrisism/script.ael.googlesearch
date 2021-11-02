@@ -39,15 +39,15 @@
                 </setting>
                 <setting id="ael.scraper.supported_metadata" type="string" label="Metadata supported by this scraper" help="">
                     <level>4</level>
-                    <default>title|year|genre|developer|nplayers|plot</default>
+                    <default></default>
                 </setting>
                 <setting id="ael.scraper.supported_assets" type="string" label="Assets supported by this scraper" help="">
                     <level>4</level>
-                    <default>title|snap|boxfront|flyer</default>
+                    <default>fanart|banner|clearlogo|title|snap|boxfront|boxback|3dbox|cartridge|flyer|map|manual</default>
                 </setting>
                 <setting id="ael.scraper.friendlyname" type="string" label="Scraper friendlyname" help="">
                     <level>4</level>
-                    <default>Arcade DB</default>
+                    <default>Google Image Search</default>
                 </setting>
             </group>
         </category>
