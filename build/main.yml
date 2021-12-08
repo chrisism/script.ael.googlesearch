@@ -65,7 +65,7 @@ stages:
       - task: ArchiveFiles@2
         inputs:
           rootFolderOrFile: '$(build.artifactstagingdirectory)/script.akl.googlesearch'
-          includeRootFolder: false
+          includeRootFolder: true
           archiveType: 'zip'
           archiveFile: '$(build.artifactstagingdirectory)/package/script.akl.googlesearch-$(packageVersion).zip'
           replaceExistingArchive: true
