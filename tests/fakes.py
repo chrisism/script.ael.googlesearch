@@ -10,10 +10,11 @@ def random_string(length:int):
 
 class FakeFile(io.FileName):
 
-    def __init__(self, pathString):
+    def __init__(self, pathString: str, isdir: bool = False):
         self.fakeContent  = ''
         self.path_str     = pathString
-        self.path_tr      = pathString       
+        self.path_tr      = pathString   
+        self.is_a_dir = isdir    
 
         self.exists = self.exists_fake
         self.write = self.write_fake
@@ -48,15 +49,11 @@ class FakeFile(io.FileName):
     def writeAll(self, bytes, flags='w'):
         self.fakeContent = self.fakeContent + bytes
 
-    def pjoin(self, *args):
-        child = FakeFile(self.path_str)
-        child.setFakeContent(self.fakeContent)
-        for arg in args:
-            child.path_str = os.path.join(child.path_str, arg)
-            child.path_tr = os.path.join(child.path_tr, arg)
-            
-        return child      
-
+    def pjoin(self, path_str, isdir = False):
+        p = FakeFile(os.path.join(self.path_str, path_str), isdir)
+        p.setFakeContent(self.fakeContent)
+        return p
+        
     def changeExtension(self, targetExt):
         switched_fake = super(FakeFile, self).changeExtension(targetExt)
         switched_fake = FakeFile(switched_fake.getPath())

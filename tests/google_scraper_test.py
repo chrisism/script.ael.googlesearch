@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 import json
 import logging
 
-from fakes import FakeProgressDialog, random_string
+from tests.fakes import FakeProgressDialog, random_string, FakeFile
 
 logging.basicConfig(format = '%(asctime)s %(module)s %(levelname)s: %(message)s',
                 datefmt = '%m/%d/%Y %I:%M:%S %p', level = logging.DEBUG)
@@ -52,11 +52,14 @@ class Test_google_scrapers(unittest.TestCase):
         print('TEST ASSETS DIR: {}'.format(cls.TEST_ASSETS_DIR))
         print('---------------------------------------------------------------------------')
 
+    @patch('akl.scrapers.kodi.getAddonDir', autospec=True, return_value=FakeFile("/test"))
+    @patch('akl.scrapers.settings.getSettingAsFilePath', autospec=True, return_value=FakeFile("/test"))
     @patch('resources.lib.scraper.net.get_URL', side_effect = mocked_google)
     @patch('resources.lib.scraper.net.download_img')
     @patch('resources.lib.scraper.io.FileName.scanFilesInPath', autospec=True)
     @patch('akl.api.client_get_rom')
-    def test_scraping_assets_for_game(self, api_rom_mock: MagicMock, scanner_mock, mock_img_downloader, mock_url_downloader):    
+    def test_scraping_assets_for_game(self, api_rom_mock: MagicMock, scanner_mock, 
+        mock_img_downloader, mock_url_downloader, settings_file, addon_dir):    
         # arrange
         settings = ScraperSettings()
         settings.scrape_metadata_policy = constants.SCRAPE_ACTION_NONE

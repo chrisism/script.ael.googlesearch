@@ -45,7 +45,7 @@ class GoogleImageSearch(Scraper):
         self.cache_assets = {}
         self.all_asset_cache = {}
         
-        cache_dir = settings.getSetting('scraper_cache_dir')
+        cache_dir = settings.getSettingAsFilePath('scraper_cache_dir')
         super(GoogleImageSearch, self).__init__(cache_dir)
 
     # --- Base class abstract methods ------------------------------------------------------------
