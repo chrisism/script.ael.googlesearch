@@ -1,0 +1,1 @@
+First official release of this Google search plugin for AKL.

@@ -1,6 +1,6 @@
 # Kodi Media Center language file
-# Addon Name: GoogleSearch scraper for AEL
-# Addon id: script.ael.googlesearch
+# Addon Name: GoogleSearch scraper for AKL
+# Addon id: script.akl.googlesearch
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
