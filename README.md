@@ -5,7 +5,6 @@ Google search scraper for AKL. This plugin can be used to scrape assets for your
 | Release | Status |
 |----|----|
 | Stable |[![Build Status](https://dev.azure.com/jnpro/AKL/_apis/build/status/script.akl.googlesearch?branchName=main)](https://dev.azure.com/jnpro/AKL/_build/latest?definitionId=15&branchName=main) |
-| Beta | [![Build Status](https://dev.azure.com/jnpro/AKL/_apis/build/status/script.akl.googlesearch?branchName=release/1.1.0)](https://dev.azure.com/jnpro/AKL/_build/latest?definitionId=15&branchName=release/1.0.0) |
 | Unstable | [![Build Status](https://dev.azure.com/jnpro/AKL/_apis/build/status/script.akl.googlesearch?branchName=dev)](https://dev.azure.com/jnpro/AKL/_build/latest?definitionId=15&branchName=dev) |
 
 ### Kodi forum thread ###
