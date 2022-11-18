@@ -1,0 +1,249 @@
+{
+    "kind": "customsearch#search",
+    "url": {
+      "type": "application/json",
+      "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+    },
+    "queries": {
+      "request": [
+        {
+          "title": "Google Custom Search - castlevania box front",
+          "totalResults": "22600000",
+          "searchTerms": "castlevania box front",
+          "count": 10,
+          "startIndex": 1,
+          "inputEncoding": "utf8",
+          "outputEncoding": "utf8",
+          "safe": "off",
+          "cx": "1212121299oopoop",
+          "searchType": "image"
+        }
+      ],
+      "nextPage": [
+        {
+          "title": "Google Custom Search - castlevania box front",
+          "totalResults": "22600000",
+          "searchTerms": "castlevania box front",
+          "count": 10,
+          "startIndex": 1,
+          "inputEncoding": "utf8",
+          "outputEncoding": "utf8",
+          "safe": "off",
+          "cx": "1212121299oopoop",
+          "searchType": "image"
+        }
+      ]
+    },
+    "context": {
+      "title": "Kodi"
+    },
+    "searchInformation": {
+      "searchTime": 0.545715,
+      "formattedSearchTime": "0.55",
+      "totalResults": "22600000",
+      "formattedTotalResults": "22,600,000"
+    },
+    "items": [
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania (1986) - MobyGames",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e (1986) - MobyGames",
+        "link": "https://www.mobygames.com/images/covers/l/5575-castlevania-dos-front-cover.jpg",
+        "displayLink": "www.mobygames.com",
+        "snippet": "Castlevania (1986) - MobyGames",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e (1986) - MobyGames",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://www.mobygames.com/game/castlevania",
+          "height": 1133,
+          "width": 800,
+          "byteSize": 220125,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfCsJiLcaNJVJoEfLojVArgszRJ5wY7CRhvqUjaV5P0to0wPmDdwUuAXg&s",
+          "thumbnailHeight": 150,
+          "thumbnailWidth": 106
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania - Codex Gamicus - Humanity's collective gaming ...",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e - Codex Gamicus - Humanity&#39;s collective gaming ...",
+        "link": "https://static.wikia.nocookie.net/gamia_gamepedia_en/images/4/4b/CastlevaniaNES.jpg/revision/latest?cb=20180806160230",
+        "displayLink": "gamicus.fandom.com",
+        "snippet": "Castlevania - Codex Gamicus - Humanity's collective gaming ...",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e - Codex Gamicus - Humanity&#39;s collective gaming ...",
+        "mime": "image/",
+        "fileFormat": "image/",
+        "image": {
+          "contextLink": "https://gamicus.fandom.com/wiki/Castlevania",
+          "height": 923,
+          "width": 640,
+          "byteSize": 97979,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAZD7LMjJml_8C0FHce198sDeEGPkykpBf1bVjvCc9iQGW2ZlZh0xEK-Q&s",
+          "thumbnailHeight": 147,
+          "thumbnailWidth": 102
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania (1986) NES box cover art - MobyGames",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e (1986) NES \u003cb\u003ebox\u003c/b\u003e cover art - MobyGames",
+        "link": "https://www.mobygames.com/images/covers/l/41554-castlevania-nes-front-cover.jpg",
+        "displayLink": "www.mobygames.com",
+        "snippet": "Castlevania (1986) NES box cover art - MobyGames",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e (1986) NES \u003cb\u003ebox\u003c/b\u003e cover art - MobyGames",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://www.mobygames.com/game/nes/castlevania/cover-art/gameCoverId,41554/",
+          "height": 703,
+          "width": 485,
+          "byteSize": 70583,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSltXU-OghDB5dG6iRATCSFTjUQ-8Trs3fdo1Nr_S40fOVKHMg9EMcmtw&s",
+          "thumbnailHeight": 140,
+          "thumbnailWidth": 97
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania Chronicles (USA) : Konami of America : Free Borrow ...",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e Chronicles (USA) : Konami of America : Free Borrow ...",
+        "link": "https://archive.org/serve/psx_cvaniach/psx_cvaniach_screenshot.jpg",
+        "displayLink": "archive.org",
+        "snippet": "Castlevania Chronicles (USA) : Konami of America : Free Borrow ...",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e Chronicles (USA) : Konami of America : Free Borrow ...",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://archive.org/details/psx_cvaniach",
+          "height": 783,
+          "width": 800,
+          "byteSize": 138391,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXhlIwRYn3TO31o6v0Ev_QZXeTqT6b8uclAUE4zLHS8SuLKEaztPhdZG6U&s",
+          "thumbnailHeight": 140,
+          "thumbnailWidth": 143
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania III: Dracula's Curse Box Shot for NES - GameFAQs",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e III: Dracula&#39;s Curse \u003cb\u003eBox\u003c/b\u003e Shot for NES - GameFAQs",
+        "link": "https://gamefaqs.gamespot.com/a/box/9/9/3/48993_front.jpg",
+        "displayLink": "gamefaqs.gamespot.com",
+        "snippet": "Castlevania III: Dracula's Curse Box Shot for NES - GameFAQs",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e III: Dracula&#39;s Curse \u003cb\u003eBox\u003c/b\u003e Shot for NES - GameFAQs",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://gamefaqs.gamespot.com/nes/587180-castlevania-iii-draculas-curse/boxes/58706",
+          "height": 895,
+          "width": 640,
+          "byteSize": 116318,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIPa9SIfgnGJjf3xgd88m5F18Dr5Q5YRJmFKI82p_sMpNXvcOQmfABuMg&s",
+          "thumbnailHeight": 146,
+          "thumbnailWidth": 104
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania for NES Complete in Box - Classicgamesblog.com",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e for NES Complete in \u003cb\u003eBox\u003c/b\u003e - Classicgamesblog.com",
+        "link": "https://classicgamesblog.com/wp-content/uploads/2012/07/castlevania-nes-cib-complete-in-box-907x1024.jpg",
+        "displayLink": "classicgamesblog.com",
+        "snippet": "Castlevania for NES Complete in Box - Classicgamesblog.com",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e for NES Complete in \u003cb\u003eBox\u003c/b\u003e - Classicgamesblog.com",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://classicgamesblog.com/2012/07/26/castlevania-for-nes-complete-in-box/",
+          "height": 1024,
+          "width": 907,
+          "byteSize": 161045,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSww8BlIWx2YspM2JLM0cEWMkpz7Xa0NK2kbE7Y2ueD0zl3SfO8QvdIX0E&s",
+          "thumbnailHeight": 150,
+          "thumbnailWidth": 133
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania: The Dracula X Chronicles Box Shot for PSP - GameFAQs",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e: The Dracula X Chronicles \u003cb\u003eBox\u003c/b\u003e Shot for PSP - GameFAQs",
+        "link": "https://gamefaqs.gamespot.com/a/box/5/9/0/83590_front.jpg",
+        "displayLink": "gamefaqs.gamespot.com",
+        "snippet": "Castlevania: The Dracula X Chronicles Box Shot for PSP - GameFAQs",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e: The Dracula X Chronicles \u003cb\u003eBox\u003c/b\u003e Shot for PSP - GameFAQs",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://gamefaqs.gamespot.com/psp/938141-castlevania-the-dracula-x-chronicles/boxes/93912",
+          "height": 800,
+          "width": 464,
+          "byteSize": 68696,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf5dd2wKAw95Z-cailXyenM0rYcjr3rZ3Ly1lkBVMFjY0BaxGEnyABYg&s",
+          "thumbnailHeight": 143,
+          "thumbnailWidth": 83
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania: Bloodlines (1994) box cover art - MobyGames",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e: Bloodlines (1994) \u003cb\u003ebox\u003c/b\u003e cover art - MobyGames",
+        "link": "https://www.mobygames.com/images/covers/l/12996-castlevania-bloodlines-genesis-front-cover.jpg",
+        "displayLink": "www.mobygames.com",
+        "snippet": "Castlevania: Bloodlines (1994) box cover art - MobyGames",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e: Bloodlines (1994) \u003cb\u003ebox\u003c/b\u003e cover art - MobyGames",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://www.mobygames.com/game/castlevania-bloodlines/cover-art/gameCoverId,12996/",
+          "height": 1132,
+          "width": 800,
+          "byteSize": 175379,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDE0CDmBWei2TI3Y9Yuxy5oT203vEBgzGLVXV5vLMM2ajCor5aZ9Cn1qw&s",
+          "thumbnailHeight": 150,
+          "thumbnailWidth": 106
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania: Curse of Darkness Box Shot for PlayStation 2 - GameFAQs",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e: Curse of Darkness \u003cb\u003eBox\u003c/b\u003e Shot for PlayStation 2 - GameFAQs",
+        "link": "https://gamefaqs.gamespot.com/a/box/1/8/3/65183_front.jpg",
+        "displayLink": "gamefaqs.gamespot.com",
+        "snippet": "Castlevania: Curse of Darkness Box Shot for PlayStation 2 - GameFAQs",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e: Curse of Darkness \u003cb\u003eBox\u003c/b\u003e Shot for PlayStation 2 - GameFAQs",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://gamefaqs.gamespot.com/ps2/925894-castlevania-curse-of-darkness/boxes/72715",
+          "height": 903,
+          "width": 640,
+          "byteSize": 255791,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrz3pYI2muHIA_--nnN50HecQpyxlI0ZDU7m62rNCVoHB0j0TpDORAdA&s",
+          "thumbnailHeight": 147,
+          "thumbnailWidth": 104
+        }
+      },
+      {
+        "kind": "customsearch#result",
+        "title": "Castlevania for NES Complete in Box - Classicgamesblog.com",
+        "htmlTitle": "\u003cb\u003eCastlevania\u003c/b\u003e for NES Complete in \u003cb\u003eBox\u003c/b\u003e - Classicgamesblog.com",
+        "link": "https://classicgamesblog.com/wp-content/uploads/2012/07/castlevania-nes-cib-complete-in-box.jpg",
+        "displayLink": "classicgamesblog.com",
+        "snippet": "Castlevania for NES Complete in Box - Classicgamesblog.com",
+        "htmlSnippet": "\u003cb\u003eCastlevania\u003c/b\u003e for NES Complete in \u003cb\u003eBox\u003c/b\u003e - Classicgamesblog.com",
+        "mime": "image/jpeg",
+        "fileFormat": "image/jpeg",
+        "image": {
+          "contextLink": "https://classicgamesblog.com/2012/07/26/castlevania-for-nes-complete-in-box/",
+          "height": 1128,
+          "width": 1000,
+          "byteSize": 219146,
+          "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYmk9u7StZbLyGTtIVajGAQUx9QItT0IxBUjF5_cwTiRV-bfroB1ifo1VV&s",
+          "thumbnailHeight": 150,
+          "thumbnailWidth": 133
+        }
+      }
+    ]
+  }
+  
