@@ -24,16 +24,16 @@ def read_file(path):
 
 def mocked_google(url, url_log=None):
 
-    mocked_html = ''
-    if '&tbm=isch' in url:
-        mocked_html = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'google_result.html'))
+    mocked_json = ''
+    if 'https://customsearch.googleapis.com/customsearch/v1' in url:
+        mocked_json = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'google_result.json'))
     if 'youtube.com' in url:
-        mocked_html = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'youtube_result.html'))
-    if mocked_html == '':
-        return net.get_URL(url, url)
+        mocked_json = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'youtube_result.html'))
+    if mocked_json == '':
+        return net.get_URL_as_json(url, url)
 
-    print('reading mocked data from file: {}'.format(mocked_html))
-    return read_file(mocked_html), 200
+    print('reading mocked data from file: {}'.format(mocked_json))
+    return json.loads(read_file(mocked_json))
 
 class Test_google_scrapers(unittest.TestCase):
     
@@ -54,7 +54,7 @@ class Test_google_scrapers(unittest.TestCase):
 
     @patch('akl.scrapers.kodi.getAddonDir', autospec=True, return_value=FakeFile("/test"))
     @patch('akl.scrapers.settings.getSettingAsFilePath', autospec=True, return_value=FakeFile("/test"))
-    @patch('resources.lib.scraper.net.get_URL', side_effect = mocked_google)
+    @patch('resources.lib.scraper.net.get_URL_as_json', side_effect = mocked_google)
     @patch('resources.lib.scraper.net.download_img')
     @patch('resources.lib.scraper.io.FileName.scanFilesInPath', autospec=True)
     @patch('akl.api.client_get_rom')
@@ -64,21 +64,28 @@ class Test_google_scrapers(unittest.TestCase):
         settings = ScraperSettings()
         settings.scrape_metadata_policy = constants.SCRAPE_ACTION_NONE
         settings.scrape_assets_policy = constants.SCRAPE_POLICY_SCRAPE_ONLY
+        settings.asset_selection_mode = constants.SCRAPE_AUTOMATIC
         settings.asset_IDs_to_scrape = [constants.ASSET_BOXFRONT_ID]
                         
         rom_id = random_string(5)
         rom = ROMObj({
             'id': rom_id,
-            'scanned_data': { 'file':Test_google_scrapers.TEST_ASSETS_DIR + '\\castlevania.zip'},
+            'm_name': 'castlevania',
+            'filename': Test_google_scrapers.TEST_ASSETS_DIR + '\\castlevania.zip',
             'platform': 'Nintendo NES',
-            'assets': {key: '' for key in constants.ROM_ASSET_ID_LIST},
+            'scanned_data': {
+                'identifier': 'castlevania'
+            },
             'asset_paths': {
                 constants.ASSET_BOXFRONT_ID: '/fronts/'
-            }
+            },
+            'assets': {key: '' for key in constants.ROM_ASSET_ID_LIST}
         })
         api_rom_mock.return_value = rom
         
-        target = ScrapeStrategy(None, 0, settings, GoogleImageSearch(), FakeProgressDialog())
+        scraper = GoogleImageSearch()
+        scraper.set_verbose_mode(True)
+        target = ScrapeStrategy(None, 0, settings, scraper, FakeProgressDialog())
 
         # act
         actual = target.process_single_rom(rom_id)

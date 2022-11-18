@@ -3,6 +3,26 @@
     <section id="script.akl.googlesearch">
         <category id="akl_general" label="30010" help="">
 			<group id="1">
+                <setting id="google_api_key" type="string" label="30106" help="">
+                    <level>0</level>
+                    <default></default>
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+                    <control type="edit" format="string">
+                        <heading>30106</heading>
+                    </control>
+                </setting>
+                <setting id="search_engine_id" type="string" label="30107" help="">
+                    <level>0</level>
+                    <default></default>
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+                    <control type="edit" format="string">
+                        <heading>30107</heading>
+                    </control>
+                </setting>
                 <setting id="scraper_cache_dir" type="path" label="30105" help="">
                     <level>1</level>
                     <default></default>
