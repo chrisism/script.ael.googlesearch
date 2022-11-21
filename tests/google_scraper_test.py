@@ -138,3 +138,15 @@ class Test_google_scrapers(unittest.TestCase):
     #     self.assertEqual(20, len(actual))
     #     for a in actual:        
     #         print('{} URL: {}'.format(a['display_name'].encode('utf-8'), a['url'].encode('utf-8') ))
+
+    def test_cleaning_url(self):    
+        # arrange
+        target = GoogleImageSearch()
+        url = "https://customsearch.googleapis.com/customsearch/v1?cx=ABC&q=test&searchType=image&key=Q9Q9&start=1"
+        expected = "https://customsearch.googleapis.com/customsearch/v1?cx=***&q=test&searchType=image&key=***&start=1"
+        
+        # act
+        actual = target._clean_URL_for_log(url)
+
+        # assert
+        assert expected == actual

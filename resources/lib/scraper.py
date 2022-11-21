@@ -19,6 +19,7 @@ from __future__ import division
 
 import logging
 import json
+import re
 from urllib.parse import quote_plus
 
 # --- AKL packages ---
@@ -41,6 +42,9 @@ class GoogleImageSearch(Scraper):
         self.cache_metadata = {}
         self.cache_assets = {}
         self.all_asset_cache = {}
+        
+        self.regex_clean_url_key = re.compile(r'key=(.*?)(^|&)')
+        self.regex_clean_url_cx = re.compile(r'cx=(.*?)(^|&)')
         
         self.logger = logging.getLogger(__name__)
         
@@ -127,7 +131,8 @@ class GoogleImageSearch(Scraper):
     # this scraper this method is trivial.
     def resolve_asset_URL(self, selected_asset, status_dic):
         url = selected_asset['url']
-        return url, url
+        url_log = self._clean_URL_for_log(url)
+        return url, url_log
 
     def resolve_asset_URL_extension(self, selected_asset, image_url, status_dic):
         return io.get_URL_extension(image_url)
@@ -210,12 +215,22 @@ class GoogleImageSearch(Scraper):
         )
         return asset_list
     
+    # Google URLs have the API key and searchengine id.
+    # Clean URLs for safe logging.
+    def _clean_URL_for_log(self, url):
+        clean_url = url
+        clean_url = self.regex_clean_url_key.sub(r'key=***\2', clean_url)
+        clean_url = self.regex_clean_url_cx.sub(r'cx=***\2', clean_url)
+
+        return clean_url
+
     # Retrieve URL and create a JSON object.
     # GoogleImageSearch
     #
     def _retrieve_URL_as_JSON(self, url, status_dic, retry=0):
         http_code = 200
-        json_data = net.get_URL_as_json(url)
+        url_log = self._clean_URL_for_log(url)
+        json_data = net.get_URL_as_json(url, url_log)
         
         if "error" in json_data:
             http_code = json_data["error"]["code"]
