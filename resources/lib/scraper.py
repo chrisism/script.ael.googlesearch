@@ -251,7 +251,7 @@ class GoogleImageSearch(Scraper):
                 asset_data['asset_ID'] = asset_info_id
                 asset_data['display_name'] = search_result['snippet']['title']
                 asset_data['url_thumb'] = search_result['snippet']['thumbnails']['default']['url']
-                asset_data['url'] = f"https://www.youtube.com/watch?v={yt_id}"
+                asset_data['url'] = f"plugin://plugin.video.youtube/play/?video_id={yt_id}"
 
                 if self.verbose_flag: 
                     self.logger.debug(f"Found asset {asset_data['url_thumb']}")
