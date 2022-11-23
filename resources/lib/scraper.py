@@ -57,20 +57,26 @@ class GoogleImageSearch(Scraper):
     # --- Base class abstract methods ------------------------------------------------------------
     def get_name(self): return 'Google Image Search'
 
-    def get_filename(self): return 'GoogleImageSearch'
+    def get_filename(self):
+        return 'GoogleImageSearch'
 
-    def supports_disk_cache(self): return True
+    def supports_disk_cache(self):
+        return True
 
-    def supports_search_string(self): return True
+    def supports_search_string(self):
+        return True
 
-    def supports_metadata_ID(self, metadata_ID): return False
+    def supports_metadata_ID(self, metadata_ID):
+        return False
 
-    def supports_metadata(self): return False
+    def supports_metadata(self):
+        return False
 
     def supports_asset_ID(self, asset_ID): 
-        return asset_ID != constants.ASSET_TRAILER_ID
+        return True
 
-    def supports_assets(self): return True
+    def supports_assets(self):
+        return True
 
     def check_before_scraping(self, status_dic): return
 
@@ -112,7 +118,12 @@ class GoogleImageSearch(Scraper):
         # --- Cache miss. Retrieve data and update cache ---
         self.logger.debug(f'Internal cache miss "{asset_specific_cache_key}"')
         
-        asset_list = self._retrieve_assets(self.candidate, asset_info_id, status_dic)
+        asset_list = []
+        if asset_info_id == constants.ASSET_TRAILER_ID:
+            asset_list = self._retrieve_youtube_assets(self.candidate, asset_info_id, status_dic)
+        else:
+            asset_list = self._retrieve_assets(self.candidate, asset_info_id, status_dic)
+        
         if not status_dic['status']: 
             return None
         if asset_list is None:
@@ -135,12 +146,9 @@ class GoogleImageSearch(Scraper):
         return url, url_log
 
     def resolve_asset_URL_extension(self, selected_asset, image_url, status_dic):
+        if selected_asset['asset_ID'] == constants.ASSET_TRAILER_ID:
+            return "url"
         return io.get_URL_extension(image_url)
-
-    def download_image(self, image_url, image_local_path: io.FileName):
-        # net_download_img() never prints URLs or paths.
-        net.download_img(image_url, image_local_path)
-        return image_local_path
 
     # --- Retrieve list of games ---
     def _search_candidates(self, search_term, platform, status_dic):
@@ -148,9 +156,12 @@ class GoogleImageSearch(Scraper):
         search_string_encoded = quote_plus(search_term)
         search_string_encoded = search_string_encoded + '+{}'
 
-        url = ("https://customsearch.googleapis.com/customsearch/v1"
+        google_url = ("https://customsearch.googleapis.com/customsearch/v1"
                f"?cx={self.search_engine_id}&q={search_string_encoded}"
                f"&searchType=image&key={self.api_key}&start={{}}")
+
+        youtube_url = ("https://youtube.googleapis.com/youtube/v3/"
+                f"search?part=snippet&maxResults={{}}&q={{}}&videoType=any&key={self.api_key}")
 
         # --- Parse game list ---
         candidate_list = []
@@ -160,7 +171,8 @@ class GoogleImageSearch(Scraper):
         candidate['platform'] = platform
         candidate['scraper_platform'] = platform
         candidate['order'] = 1
-        candidate['url'] = url
+        candidate['url'] = google_url
+        candidate['url_trailer'] = youtube_url
         candidate_list.append(candidate)
 
         return candidate_list
@@ -176,13 +188,14 @@ class GoogleImageSearch(Scraper):
         else:
             asset_info_term = asset_info_id
         
+        url = candidate['url']
         search_results = []
         json_data = None
         for i in [1, 11, 21, 31]:
             if json_data and json_data["queries"]["nextPage"] != i:
                 break
 
-            url = candidate['url'].format(asset_info_term, i)
+            url = url.format(asset_info_term, i)
             json_data = self._retrieve_URL_as_JSON(url, status_dic)
             if not search_results and (not json_data or not status_dic['status']): 
                 self.logger.warning('No data could be retrieved from the results page')
@@ -215,6 +228,44 @@ class GoogleImageSearch(Scraper):
         )
         return asset_list
     
+    def _retrieve_youtube_assets(self, candidate, asset_info_id, status_dic):
+        self.logger.debug(f'Getting {asset_info_id}...')
+        
+        url = candidate['url_trailer']
+        url = url.format(40, asset_info_id)
+
+        json_data = self._retrieve_URL_as_JSON(url, status_dic)
+        if not json_data or not status_dic['status']: 
+            self.logger.warning('No data could be retrieved from the results page')
+            return
+
+        self._dump_json_debug('GoogleImageSearch_retrieve_assets.json', json_data)
+        search_results = json_data["items"]
+
+        # --- Parse images page data ---
+        asset_list = []
+        for search_result in search_results:
+            try:
+                yt_id = search_result['id']['videoId']
+                asset_data = self._new_assetdata_dic()
+                asset_data['asset_ID'] = asset_info_id
+                asset_data['display_name'] = search_result['snippet']['title']
+                asset_data['url_thumb'] = search_result['snippet']['thumbnails']['default']['url']
+                asset_data['url'] = f"https://www.youtube.com/watch?v={yt_id}"
+
+                if self.verbose_flag: 
+                    self.logger.debug(f"Found asset {asset_data['url_thumb']}")
+                asset_list.append(asset_data)    
+            except Exception:
+                self.logger.exception('Error while parsing single result.')
+                if self.verbose_flag: 
+                    self.logger.error(f'Failed result: {json.dumps(search_result)}')
+                
+        self.logger.debug(
+            f"Found {len(asset_list)} assets for candidate #{candidate['id']} of type {asset_info_id}"
+        )
+        return asset_list
+
     # Google URLs have the API key and searchengine id.
     # Clean URLs for safe logging.
     def _clean_URL_for_log(self, url):

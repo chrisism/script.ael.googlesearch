@@ -63,7 +63,7 @@
                 </setting>
                 <setting id="akl.scraper.supported_assets" type="string" label="Assets supported by this scraper" help="">
                     <level>4</level>
-                    <default>fanart|banner|clearlogo|title|snap|boxfront|boxback|3dbox|cartridge|flyer|map|manual</default>
+                    <default>fanart|banner|clearlogo|title|snap|boxfront|boxback|3dbox|cartridge|flyer|map|manual|trailer</default>
                 </setting>
                 <setting id="akl.scraper.friendlyname" type="string" label="Scraper friendlyname" help="">
                     <level>4</level>
