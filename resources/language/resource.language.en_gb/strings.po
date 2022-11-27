@@ -34,6 +34,10 @@ msgctxt "#30107"
 msgid "Search Engine ID"
 msgstr "settings.xml"
 
+msgctxt "#30108"
+msgid "Update plugin configuriation"
+msgstr "settings.xml"
+
 msgctxt "#30129"
 msgid "Log level"
 msgstr "settings.xml"

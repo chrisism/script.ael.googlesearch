@@ -59,7 +59,7 @@
                 </setting>
                 <setting id="akl.scraper.supported_metadata" type="string" label="Metadata supported by this scraper" help="">
                     <level>4</level>
-                    <default></default>
+                    <default>none</default>
                 </setting>
                 <setting id="akl.scraper.supported_assets" type="string" label="Assets supported by this scraper" help="">
                     <level>4</level>
@@ -68,6 +68,13 @@
                 <setting id="akl.scraper.friendlyname" type="string" label="Scraper friendlyname" help="">
                     <level>4</level>
                     <default>Google Image Search</default>
+                </setting>
+                <setting id="akl.update_plugin" type="action" label="30108" help="">
+                    <level>0</level>
+                    <data>RunScript(script.akl.googlesearch, --cmd, update)</data>
+                    <control type="button" format="action">
+                        <close>true</close>
+                    </control>
                 </setting>
             </group>
         </category>
