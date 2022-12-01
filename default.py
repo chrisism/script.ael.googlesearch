@@ -46,7 +46,7 @@ def run_plugin():
     for i in range(len(sys.argv)): logger.info('sys.argv[{}] "{}"'.format(i, sys.argv[i]))
     
     parser = argparse.ArgumentParser(prog='script.akl.googlesearch')
-    parser.add_argument('--cmd', help="Command to execute", choices=['launch', 'scan', 'scrape', 'configure', 'update'])
+    parser.add_argument('--cmd', help="Command to execute", choices=['launch', 'scan', 'scrape', 'configure', 'update-settings'])
     parser.add_argument('--type',help="Plugin type", choices=['LAUNCHER', 'SCANNER', 'SCRAPER'], default=constants.AddonType.LAUNCHER.name)
     parser.add_argument('--server_host', type=str, help="Host")
     parser.add_argument('--server_port', type=int, help="Port")
@@ -64,7 +64,7 @@ def run_plugin():
         
     if args.type == constants.AddonType.SCRAPER.name and args.cmd == 'scrape':
         run_scraper(args)
-    elif args.cmd == "update":
+    elif args.cmd == "update-settings":
         update_plugin()
     else:
         kodi.dialog_OK(text=parser.format_help())
@@ -104,9 +104,10 @@ def run_scraper(args):
 # UPDATE PLUGIN
 # ---------------------------------------------------------------------------------------------
 def update_plugin():
-    supported_addons = '|'.join(constants.ROM_ASSET_ID_LIST)
-    settings.setSetting("akl.scraper.supported_assets", supported_addons)
-    kodi.notify("Updating AKL plugin settings for this addon")
+    supported_assets = '|'.join(constants.ROM_ASSET_ID_LIST)
+    
+    settings.setSetting("akl.scraper.supported_assets", supported_assets)
+    kodi.notify("Updated AKL plugin settings for this addon")
 
 # ---------------------------------------------------------------------------------------------
 # RUN
