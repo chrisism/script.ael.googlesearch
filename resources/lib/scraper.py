@@ -32,7 +32,7 @@ from akl.api import ROMObj
 # ------------------------------------------------------------------------------------------------
 # Google image search: simple free search
 #
-# ------------------------------------------------------------------------------------------------       
+# ------------------------------------------------------------------------------------------------
 class GoogleImageSearch(Scraper):
     
     # --- Constructor ----------------------------------------------------------------------------
@@ -55,7 +55,8 @@ class GoogleImageSearch(Scraper):
         super(GoogleImageSearch, self).__init__(cache_dir)
 
     # --- Base class abstract methods ------------------------------------------------------------
-    def get_name(self): return 'Google Image Search'
+    def get_name(self):
+        return 'Google Image Search'
 
     def get_filename(self):
         return 'GoogleImageSearch'
@@ -72,15 +73,16 @@ class GoogleImageSearch(Scraper):
     def supports_metadata(self):
         return False
 
-    def supports_asset_ID(self, asset_ID): 
+    def supports_asset_ID(self, asset_ID):
         return True
 
     def supports_assets(self):
         return True
 
-    def check_before_scraping(self, status_dic): return
+    def check_before_scraping(self, status_dic):
+        return
 
-    def get_candidates(self, search_term:str, rom:ROMObj, platform, status_dic):
+    def get_candidates(self, search_term: str, rom: ROMObj, platform, status_dic):
         # --- If scraper is disabled return immediately and silently ---
         if self.scraper_disabled:
             # If the scraper is disabled return None and do not mark error in status_dic.
@@ -92,12 +94,14 @@ class GoogleImageSearch(Scraper):
         self.logger.debug(f'search_term          "{search_term}"')
         self.logger.debug(f'AKL platform         "{platform}"')
         candidate_list = self._search_candidates(search_term, platform, status_dic)
-        if not status_dic['status']: return None
+        if not status_dic['status']:
+            return None
 
         return candidate_list
 
     # GoogleImageSearch does not support metadata
-    def get_metadata(self, status_dic): return None
+    def get_metadata(self, status_dic):
+        return None
 
     # This function may be called many times in the ROM Scanner.
     # See comments for this function in the Scraper abstract class.
@@ -124,7 +128,7 @@ class GoogleImageSearch(Scraper):
         else:
             asset_list = self._retrieve_assets(self.candidate, asset_info_id, status_dic)
         
-        if not status_dic['status']: 
+        if not status_dic['status']:
             return None
         if asset_list is None:
             asset_list = []
@@ -157,11 +161,11 @@ class GoogleImageSearch(Scraper):
         search_string_encoded = search_string_encoded + '+{}'
 
         google_url = ("https://customsearch.googleapis.com/customsearch/v1"
-               f"?cx={self.search_engine_id}&q={search_string_encoded}"
-               f"&searchType=image&key={self.api_key}&start={{}}")
+                      f"?cx={self.search_engine_id}&q={search_string_encoded}"
+                      f"&searchType=image&key={self.api_key}&start={{}}")
 
         youtube_url = ("https://youtube.googleapis.com/youtube/v3/"
-                f"search?part=snippet&maxResults={{}}&q={{}}&videoType=any&key={self.api_key}")
+                       f"search?part=snippet&maxResults={{}}&q={{}}&videoType=any&key={self.api_key}")
 
         # --- Parse game list ---
         candidate_list = []
@@ -197,7 +201,7 @@ class GoogleImageSearch(Scraper):
 
             url = url.format(asset_info_term, i)
             json_data = self._retrieve_URL_as_JSON(url, status_dic)
-            if not search_results and (not json_data or not status_dic['status']): 
+            if not search_results and (not json_data or not status_dic['status']):
                 self.logger.warning('No data could be retrieved from the results page')
                 return
 
@@ -215,12 +219,12 @@ class GoogleImageSearch(Scraper):
                 asset_data['url_thumb'] = search_result['image']["thumbnailLink"]
                 asset_data['url'] = search_result['link']
 
-                if self.verbose_flag: 
+                if self.verbose_flag:
                     self.logger.debug(f"Found asset {asset_data['url_thumb']}")
-                asset_list.append(asset_data)    
+                asset_list.append(asset_data)
             except Exception:
                 self.logger.exception('Error while parsing single result.')
-                if self.verbose_flag: 
+                if self.verbose_flag:
                     self.logger.error(f'Failed result: {json.dumps(search_result)}')
                 
         self.logger.debug(
@@ -235,7 +239,7 @@ class GoogleImageSearch(Scraper):
         url = url.format(40, asset_info_id)
 
         json_data = self._retrieve_URL_as_JSON(url, status_dic)
-        if not json_data or not status_dic['status']: 
+        if not json_data or not status_dic['status']:
             self.logger.warning('No data could be retrieved from the results page')
             return
 
@@ -253,12 +257,12 @@ class GoogleImageSearch(Scraper):
                 asset_data['url_thumb'] = search_result['snippet']['thumbnails']['default']['url']
                 asset_data['url'] = f"plugin://plugin.video.youtube/play/?video_id={yt_id}"
 
-                if self.verbose_flag: 
+                if self.verbose_flag:
                     self.logger.debug(f"Found asset {asset_data['url_thumb']}")
-                asset_list.append(asset_data)    
+                asset_list.append(asset_data)
             except Exception:
                 self.logger.exception('Error while parsing single result.')
-                if self.verbose_flag: 
+                if self.verbose_flag:
                     self.logger.error(f'Failed result: {json.dumps(search_result)}')
                 
         self.logger.debug(

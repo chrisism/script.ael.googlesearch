@@ -22,13 +22,14 @@ from akl.scrapers import ScraperSettings, ScrapeStrategy
 # Local modules
 from resources.lib.scraper import GoogleImageSearch
 
-kodilogging.config() 
+kodilogging.config()
 logger = logging.getLogger(__name__)
 
 # --- Addon object (used to access settings) ---
-addon           = xbmcaddon.Addon()
-addon_id        = addon.getAddonInfo('id')
-addon_version   = addon.getAddonInfo('version')
+addon = xbmcaddon.Addon()
+addon_id = addon.getAddonInfo('id')
+addon_version = addon.getAddonInfo('version')
+
 
 # ---------------------------------------------------------------------------------------------
 # This is the plugin entry point.
@@ -39,15 +40,20 @@ def run_plugin():
     logger.info('addon.id         "{}"'.format(addon_id))
     logger.info('addon.version    "{}"'.format(addon_version))
     logger.info('sys.platform     "{}"'.format(sys.platform))
-    if io.is_android(): logger.info('OS               "Android"')
-    if io.is_windows(): logger.info('OS               "Windows"')
-    if io.is_osx():     logger.info('OS               "OSX"')
-    if io.is_linux():   logger.info('OS               "Linux"')
-    for i in range(len(sys.argv)): logger.info('sys.argv[{}] "{}"'.format(i, sys.argv[i]))
+    if io.is_android():
+        logger.info('OS               "Android"')
+    if io.is_windows():
+        logger.info('OS               "Windows"')
+    if io.is_osx():
+        logger.info('OS               "OSX"')
+    if io.is_linux():
+        logger.info('OS               "Linux"')
+    for i in range(len(sys.argv)):
+        logger.info('sys.argv[{}] "{}"'.format(i, sys.argv[i]))
     
     parser = argparse.ArgumentParser(prog='script.akl.googlesearch')
     parser.add_argument('--cmd', help="Command to execute", choices=['launch', 'scan', 'scrape', 'configure', 'update-settings'])
-    parser.add_argument('--type',help="Plugin type", choices=['LAUNCHER', 'SCANNER', 'SCRAPER'], default=constants.AddonType.LAUNCHER.name)
+    parser.add_argument('--type', help="Plugin type", choices=['LAUNCHER', 'SCANNER', 'SCRAPER'], default=constants.AddonType.LAUNCHER.name)
     parser.add_argument('--server_host', type=str, help="Host")
     parser.add_argument('--server_port', type=int, help="Port")
     parser.add_argument('--rom_id', type=str, help="ROM ID")
@@ -71,20 +77,21 @@ def run_plugin():
         
     logger.debug('Advanced Kodi Launcher Plugin: Googlesearch Scraper -> exit')
 
+
 # ---------------------------------------------------------------------------------------------
 # Scraper methods.
 # ---------------------------------------------------------------------------------------------
 def run_scraper(args):
     logger.debug('========== run_scraper() BEGIN ==================================================')
-    pdialog             = kodi.ProgressDialog()
+    pdialog = kodi.ProgressDialog()
     
-    settings            = ScraperSettings.from_settings_dict(args.settings)
-    scraper_strategy    = ScrapeStrategy(
-                            args.server_host, 
-                            args.server_port, 
-                            settings,
-                            GoogleImageSearch(), 
-                            pdialog)
+    settings = ScraperSettings.from_settings_dict(args.settings)
+    scraper_strategy = ScrapeStrategy(
+        args.server_host,
+        args.server_port,
+        settings,
+        GoogleImageSearch(),
+        pdialog)
                         
     if args.rom_id is not None:
         scraped_rom = scraper_strategy.process_single_rom(args.rom_id)
@@ -100,6 +107,7 @@ def run_scraper(args):
         scraper_strategy.store_scraped_roms(args.akl_addon_id, args.romcollection_id, scraped_roms)
         pdialog.endProgress()
 
+
 # ---------------------------------------------------------------------------------------------
 # UPDATE PLUGIN
 # ---------------------------------------------------------------------------------------------
@@ -109,6 +117,7 @@ def update_plugin():
     settings.setSetting("akl.scraper.supported_assets", supported_assets)
     kodi.notify("Updated AKL plugin settings for this addon")
 
+
 # ---------------------------------------------------------------------------------------------
 # RUN
 # ---------------------------------------------------------------------------------------------
@@ -117,4 +126,3 @@ try:
 except Exception as ex:
     logger.fatal('Exception in plugin', exc_info=ex)
     kodi.notify_error("General failure")
-    
