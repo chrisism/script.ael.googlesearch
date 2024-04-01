@@ -35,11 +35,10 @@ addon_version = addon.getAddonInfo('version')
 # This is the plugin entry point.
 # ---------------------------------------------------------------------------------------------
 def run_plugin():
-    # --- Some debug stuff for development ---
     os_name = io.is_which_os()
     
     # --- Some debug stuff for development ---
-    logger.info('------------ Called Advanced Kodi Launcher Plugin: GameFAQs Scraper ------------')
+    logger.info('------------ Called Advanced Kodi Launcher Plugin: Googlesearch Scraper ------------')
     logger.info(f'addon.id         "{addon_id}"')
     logger.info(f'addon.version    "{addon_version}"')
     logger.info(f'sys.platform     "{sys.platform}"')
