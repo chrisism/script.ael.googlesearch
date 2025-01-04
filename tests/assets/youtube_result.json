@@ -1,0 +1,419 @@
+{
+	"kind": "youtube#searchListResponse",
+	"etag": "FkWRJUEVlyAaLmaR6luz04ByA1g",
+	"nextPageToken": "CA8QAA",
+	"regionCode": "NL",
+	"pageInfo": {
+		"totalResults": 1000000,
+		"resultsPerPage": 15
+	},
+	"items": [{
+			"kind": "youtube#searchResult",
+			"etag": "eJOJJPRkaUJI5kgsHW8dTjLethQ",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "D4Q_XYVescc"
+			},
+			"snippet": {
+				"publishedAt": "2017-04-26T17:05:23Z",
+				"channelId": "UC9YydG57epLqxA9cTzZXSeQ",
+				"title": "Official Reveal Trailer | Call of Duty: WWII",
+				"description": "WWII confirmed. Over two years in the making, Sledgehammer Games delivers a gritty, personal experience in the setting of the ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/D4Q_XYVescc/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/D4Q_XYVescc/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/D4Q_XYVescc/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Call of Duty",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-04-26T17:05:23Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "GIhvNLJZrvTHBy5Ujn63qsUD9hU",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "a9ITIaKzG3A"
+			},
+			"snippet": {
+				"publishedAt": "2017-09-18T17:00:32Z",
+				"channelId": "UC9YydG57epLqxA9cTzZXSeQ",
+				"title": "Official Call of Duty: WWII - Story Trailer",
+				"description": "Call of Duty: WWII tells the story of Private Ronald Daniels, a young recruit in the U.S. First Infantry Division who ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/a9ITIaKzG3A/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/a9ITIaKzG3A/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/a9ITIaKzG3A/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Call of Duty",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-09-18T17:00:32Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "l1ZMHA-HJEXnaqzVGrX-BCZDvSw",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "oDVrOyT7ImQ"
+			},
+			"snippet": {
+				"publishedAt": "2017-04-27T08:55:01Z",
+				"channelId": "UCg_JwOXFtu3iEtbr4ttXm9g",
+				"title": "Call of Duty: WWII | Reveal Trailer | PS4",
+				"description": "WWII confirmed. Over two years in the making, Sledgehammer Games delivers a gritty, personal experience in the setting of the ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/oDVrOyT7ImQ/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/oDVrOyT7ImQ/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/oDVrOyT7ImQ/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "PlayStation Europe",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-04-27T08:55:01Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "fl-TfQmqgUyC4DcVr6F2hGYd1Ys",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "42GiPMtJ-1I"
+			},
+			"snippet": {
+				"publishedAt": "2017-06-13T01:31:57Z",
+				"channelId": "UC9YydG57epLqxA9cTzZXSeQ",
+				"title": "Official Call of Duty: WWII â€“ Multiplayer Reveal Trailer",
+				"description": "Fast-paced, grounded combat returns in Call of Duty: WWII Multiplayer. Armed with an arsenal of iconic Allied and Axis ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/42GiPMtJ-1I/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/42GiPMtJ-1I/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/42GiPMtJ-1I/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Call of Duty",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-06-13T01:31:57Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "1Nc8nYYghEUQoAigbhnk7IUwzLM",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "B3wcX6gXHg8"
+			},
+			"snippet": {
+				"publishedAt": "2017-10-16T16:00:01Z",
+				"channelId": "UCjBp_7RuDBUYbd1LegWEJ8g",
+				"title": "Official Call of Duty: WWII Live Action Trailer Reassemble!",
+				"description": "Call of Duty is returning to WWII, which can only mean one thing: it's time to get your squad back together. Follow a team as they ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/B3wcX6gXHg8/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/B3wcX6gXHg8/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/B3wcX6gXHg8/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Xbox",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-10-16T16:00:01Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "O5OQ09EIlZ9ZAyxw5tW9xnS59q0",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "VM2krppk9dA"
+			},
+			"snippet": {
+				"publishedAt": "2017-11-03T03:42:30Z",
+				"channelId": "UCVQfJMcBwL6LN7JzAxgV-Dw",
+				"title": "Call of Duty WWII - Intro (1440p/60fps)",
+				"description": "Call of Duty WWII - Intro cinematic (1440p/60fps)",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/VM2krppk9dA/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/VM2krppk9dA/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/VM2krppk9dA/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "WOWstoryGAMES",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-11-03T03:42:30Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "qrVdnal4Io1Q7pTOzlaLa8VMFZQ",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "IFAmtwU9xyY"
+			},
+			"snippet": {
+				"publishedAt": "2018-04-03T17:00:26Z",
+				"channelId": "UC9YydG57epLqxA9cTzZXSeQ",
+				"title": "Official Call of Duty: WWII - The War Machine DLC 2 Trailer",
+				"description": "Tensions escalate in DLC Pack 2 for Call of Duty: WWII -- The War Machine. Join the Allies and stop the powerful Axis advance ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/IFAmtwU9xyY/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/IFAmtwU9xyY/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/IFAmtwU9xyY/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Call of Duty",
+				"liveBroadcastContent": "none",
+				"publishTime": "2018-04-03T17:00:26Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "l4EZcl6ZW5B-NwuX8qr9zBknVdI",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "EqX_aBx1Qic"
+			},
+			"snippet": {
+				"publishedAt": "2017-09-18T17:00:03Z",
+				"channelId": "UC-2Y8dQb0S6DtpxNgAKoJKA",
+				"title": "Call of Duty: WWII - Story Trailer | PS4",
+				"description": "https://www.playstation.com/en-us/games/call-of-duty-wwii-ps4/ Call of Duty: WWII tells the story of Private Ronald Daniels ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/EqX_aBx1Qic/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/EqX_aBx1Qic/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/EqX_aBx1Qic/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "PlayStation",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-09-18T17:00:03Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "WLZcROuv90rtfi-8uSuAfXL00yA",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "87thruO_RA0"
+			},
+			"snippet": {
+				"publishedAt": "2017-04-26T19:47:53Z",
+				"channelId": "UC1TglkZCzM614801bBN5wFg",
+				"title": "Call of Duty: WWII - Reveal Trailer [PS4, deutsch]",
+				"description": "Call of Duty: WWII fahrt die Call of Duty-Serie auf PS4 in den zweiten Weltkrieg und zuruck zu seinen Wurzeln! Im Reveal Trailer ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/87thruO_RA0/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/87thruO_RA0/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/87thruO_RA0/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "PlayStation DACH",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-04-26T19:47:53Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "e8XsjsO2OdFEEogfAnHg8MmqES8",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "W-xEcb8WF7o"
+			},
+			"snippet": {
+				"publishedAt": "2017-06-13T01:40:53Z",
+				"channelId": "UCl3hyq3lvokEV5rrxGoE3OA",
+				"title": "Official Call of Duty WW2 Multiplayer Gameplay - New COD WW2 Trailer",
+				"description": "Call of Duty WW2 multiplayer as seen at the Sony E3 2017 conference. You know what to expect by now, right? Still, it's nice to ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/W-xEcb8WF7o/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/W-xEcb8WF7o/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/W-xEcb8WF7o/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Game Clips And Tips",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-06-13T01:40:53Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "VnR8q9By-5QMvKLM-PobfaUssKo",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "uDOwZF70Xuc"
+			},
+			"snippet": {
+				"publishedAt": "2017-09-18T17:13:05Z",
+				"channelId": "UCA0MDADBWmCFro3SXR5mlSg",
+				"title": "CALL OF DUTY: WWII Story Trailer (2017)",
+				"description": "Call of Duty: WWII Story Trailer 2017 | Watch the official trailer for the action game, arriving on PC (Microsoft Windows), Xbox One ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/uDOwZF70Xuc/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/uDOwZF70Xuc/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/uDOwZF70Xuc/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Entertainment Access",
+				"liveBroadcastContent": "none",
+				"publishTime": "2017-09-18T17:13:05Z"
+			}
+		},
+		{
+			"kind": "youtube#searchResult",
+			"etag": "8JeXyN5pmr9TGfv0db6Rnl1bbAk",
+			"id": {
+				"kind": "youtube#video",
+				"videoId": "1RUcfZY6A3M"
+			},
+			"snippet": {
+				"publishedAt": "2018-06-19T17:00:09Z",
+				"channelId": "UC9YydG57epLqxA9cTzZXSeQ",
+				"title": "Official Call of Duty: WWII - United Front DLC 3 Trailer",
+				"description": "The Allies retaliate in DLC Pack 3 for Call of DutyÂ®: WWII - United Front. Experience the dramatic drive toward Berlin across three ...",
+				"thumbnails": {
+					"default": {
+						"url": "https://i.ytimg.com/vi/1RUcfZY6A3M/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/1RUcfZY6A3M/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/1RUcfZY6A3M/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"channelTitle": "Call of Duty",
+				"liveBroadcastContent": "none",
+				"publishTime": "2018-06-19T17:00:09Z"
+			}
+		}
+	]
+}

@@ -24,16 +24,16 @@ def read_file(path):
 
 def mocked_google(url, url_log=None):
 
-    mocked_html = ''
-    if '&tbm=isch' in url:
-        mocked_html = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'google_result.html'))
-    if 'youtube.com' in url:
-        mocked_html = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'youtube_result.html'))
-    if mocked_html == '':
-        return net.get_URL(url, url)
+    mocked_json = ''
+    if 'https://customsearch.googleapis.com/customsearch/v1' in url:
+        mocked_json = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'google_result.json'))
+    if 'https://youtube.googleapis.com/youtube/v3' in url:
+        mocked_json = os.path.abspath(os.path.join(Test_google_scrapers.TEST_ASSETS_DIR,'youtube_result.json'))
+    if mocked_json == '':
+        return net.get_URL_as_json(url, url)
 
-    print('reading mocked data from file: {}'.format(mocked_html))
-    return read_file(mocked_html), 200
+    print('reading mocked data from file: {}'.format(mocked_json))
+    return json.loads(read_file(mocked_json))
 
 class Test_google_scrapers(unittest.TestCase):
     
@@ -54,7 +54,7 @@ class Test_google_scrapers(unittest.TestCase):
 
     @patch('akl.scrapers.kodi.getAddonDir', autospec=True, return_value=FakeFile("/test"))
     @patch('akl.scrapers.settings.getSettingAsFilePath', autospec=True, return_value=FakeFile("/test"))
-    @patch('resources.lib.scraper.net.get_URL', side_effect = mocked_google)
+    @patch('resources.lib.scraper.net.get_URL_as_json', side_effect = mocked_google)
     @patch('resources.lib.scraper.net.download_img')
     @patch('resources.lib.scraper.io.FileName.scanFilesInPath', autospec=True)
     @patch('akl.api.client_get_rom')
@@ -64,21 +64,28 @@ class Test_google_scrapers(unittest.TestCase):
         settings = ScraperSettings()
         settings.scrape_metadata_policy = constants.SCRAPE_ACTION_NONE
         settings.scrape_assets_policy = constants.SCRAPE_POLICY_SCRAPE_ONLY
+        settings.asset_selection_mode = constants.SCRAPE_AUTOMATIC
         settings.asset_IDs_to_scrape = [constants.ASSET_BOXFRONT_ID]
                         
         rom_id = random_string(5)
         rom = ROMObj({
             'id': rom_id,
-            'scanned_data': { 'file':Test_google_scrapers.TEST_ASSETS_DIR + '\\castlevania.zip'},
+            'm_name': 'castlevania',
+            'filename': Test_google_scrapers.TEST_ASSETS_DIR + '\\castlevania.zip',
             'platform': 'Nintendo NES',
-            'assets': {key: '' for key in constants.ROM_ASSET_ID_LIST},
+            'scanned_data': {
+                'identifier': 'castlevania'
+            },
             'asset_paths': {
                 constants.ASSET_BOXFRONT_ID: '/fronts/'
-            }
+            },
+            'assets': {key: '' for key in constants.ROM_ASSET_ID_LIST}
         })
         api_rom_mock.return_value = rom
         
-        target = ScrapeStrategy(None, 0, settings, GoogleImageSearch(), FakeProgressDialog())
+        scraper = GoogleImageSearch()
+        scraper.set_verbose_mode(True)
+        target = ScrapeStrategy(None, 0, settings, scraper, FakeProgressDialog())
 
         # act
         actual = target.process_single_rom(rom_id)
@@ -89,45 +96,55 @@ class Test_google_scrapers(unittest.TestCase):
         
         self.assertTrue(actual.entity_data['assets'][constants.ASSET_BOXFRONT_ID], 'No front defined')
         
-    # @patch('resources.lib.scraper.net.get_URL', side_effect = mocked_google)
-    # @patch('resources.lib.scraper.net.download_img')
-    # @patch('akl.api.client_get_rom')
-    # def test_scraping_trailer_assets_for_game(self, api_rom_mock: MagicMock, mock_img_downloader, mock_url_downloader):    
-    #     # arrange
-    #     settings = ScraperSettings()
-    #     settings.scrape_metadata_policy = constants.SCRAPE_ACTION_NONE
-    #     settings.scrape_assets_policy = constants.SCRAPE_POLICY_SCRAPE_ONLY
-    #     settings.asset_IDs_to_scrape = [constants.ASSET_BOXFRONT_ID]
+    @patch('akl.scrapers.kodi.getAddonDir', autospec=True, return_value=FakeFile("/test"))
+    @patch('akl.scrapers.settings.getSettingAsFilePath', autospec=True, return_value=FakeFile("/test"))
+    @patch('resources.lib.scraper.net.get_URL_as_json', side_effect = mocked_google)
+    @patch('resources.lib.scraper.io.FileName.scanFilesInPath', autospec=True)
+    @patch('akl.api.client_get_rom')
+    def test_scraping_trailer_assets_for_game(self, api_rom_mock: MagicMock, scanner_mock, 
+        mock_img_downloader, settings_file, addon_dir): 
+        # arrange
+        settings = ScraperSettings()
+        settings.scrape_metadata_policy = constants.SCRAPE_ACTION_NONE
+        settings.scrape_assets_policy = constants.SCRAPE_POLICY_SCRAPE_ONLY
+        settings.asset_selection_mode = constants.SCRAPE_AUTOMATIC
+        settings.asset_IDs_to_scrape = [constants.ASSET_TRAILER_ID]
                         
-    #     rom_id = random_string(5)
-    #     rom = ROMObj({
-    #         'id': rom_id,
-    #         'filename': Test_google_scrapers.TEST_ASSETS_DIR + '\\castlevania.zip',
-    #         'platform': 'Nintendo NES'
-    #     })
-    #     api_rom_mock.return_value = rom
+        rom_id = random_string(5)
+        rom = ROMObj({
+            'id': rom_id,
+            'm_name': 'call of duty ww-ii',
+            'filename': Test_google_scrapers.TEST_ASSETS_DIR + '\\codwwii.zip',
+            'platform': 'Windows',
+            'scanned_data': {
+                'identifier': 'codwwii'
+            },
+            'asset_paths': {
+                constants.ASSET_TRAILER_ID: '/trailers/'
+            },
+            'assets': {key: '' for key in constants.ROM_ASSET_ID_LIST}
+        })
+        api_rom_mock.return_value = rom
         
-    #     target = ScrapeStrategy(None, 0, settings, YouTubeSearch(), FakeProgressDialog())
+        scraper = GoogleImageSearch()
+        scraper.set_verbose_mode(True)
+        target = ScrapeStrategy(None, 0, settings, scraper, FakeProgressDialog())
 
-    #     # act
-    #     actual = target.process_single_rom(rom_id)
+        # act
+        actual = target.process_single_rom(rom_id)
                 
-    #     settings = self.get_test_settings()
-    #     status_dic = {}
-    #     status_dic['status'] = True
-    #     target = YouTubeSearch(settings)
+        # assert
+        self.assertTrue(actual) 
+        logger.info(actual.get_data_dic()) 
         
-    #     asset_to_scrape = g_assetFactory.get_asset_info(ASSET_TRAILER_ID)
-    #     f = FakeFile('/roms/castlevania.nes')
-    #     platform = 'Nintendo NES'
+    def test_cleaning_url(self):    
+        # arrange
+        target = GoogleImageSearch()
+        url = "https://customsearch.googleapis.com/customsearch/v1?cx=ABC&q=test&searchType=image&key=Q9Q9&start=1"
+        expected = "https://customsearch.googleapis.com/customsearch/v1?cx=***&q=test&searchType=image&key=***&start=1"
+        
+        # act
+        actual = target._clean_URL_for_log(url)
 
-    #     # act
-    #     candidates = target.get_candidates('castlevania', f, f, platform, status_dic)
-    #     target.set_candidate(f, platform, candidates[0])
-    #     actual = target.get_assets(asset_to_scrape, status_dic)
-                
-    #     # assert
-    #     self.assertTrue(actual)     
-    #     self.assertEqual(20, len(actual))
-    #     for a in actual:        
-    #         print('{} URL: {}'.format(a['display_name'].encode('utf-8'), a['url'].encode('utf-8') ))
+        # assert
+        assert expected == actual

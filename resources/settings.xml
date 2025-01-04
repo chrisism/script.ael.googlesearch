@@ -3,6 +3,26 @@
     <section id="script.akl.googlesearch">
         <category id="akl_general" label="30010" help="">
 			<group id="1">
+                <setting id="google_api_key" type="string" label="30106" help="">
+                    <level>0</level>
+                    <default></default>
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+                    <control type="edit" format="string">
+                        <heading>30106</heading>
+                    </control>
+                </setting>
+                <setting id="search_engine_id" type="string" label="30107" help="">
+                    <level>0</level>
+                    <default></default>
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+                    <control type="edit" format="string">
+                        <heading>30107</heading>
+                    </control>
+                </setting>
                 <setting id="scraper_cache_dir" type="path" label="30105" help="">
                     <level>1</level>
                     <default></default>
@@ -39,15 +59,22 @@
                 </setting>
                 <setting id="akl.scraper.supported_metadata" type="string" label="Metadata supported by this scraper" help="">
                     <level>4</level>
-                    <default></default>
+                    <default>none</default>
                 </setting>
                 <setting id="akl.scraper.supported_assets" type="string" label="Assets supported by this scraper" help="">
                     <level>4</level>
-                    <default>fanart|banner|clearlogo|title|snap|boxfront|boxback|3dbox|cartridge|flyer|map|manual</default>
+                    <default>fanart|banner|clearlogo|title|snap|boxfront|boxback|3dbox|cartridge|flyer|map|manual|trailer</default>
                 </setting>
                 <setting id="akl.scraper.friendlyname" type="string" label="Scraper friendlyname" help="">
                     <level>4</level>
                     <default>Google Image Search</default>
+                </setting>
+                <setting id="akl.update_plugin" type="action" label="30108" help="">
+                    <level>0</level>
+                    <data>RunScript(script.akl.googlesearch, --cmd, update)</data>
+                    <control type="button" format="action">
+                        <close>true</close>
+                    </control>
                 </setting>
             </group>
         </category>

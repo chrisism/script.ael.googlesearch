@@ -26,6 +26,18 @@ msgctxt "#30105"
 msgid "Cache directory"
 msgstr "settings.xml"
 
+msgctxt "#30106"
+msgid "Google API key"
+msgstr "settings.xml"
+
+msgctxt "#30107"
+msgid "Search Engine ID"
+msgstr "settings.xml"
+
+msgctxt "#30108"
+msgid "Update plugin configuriation"
+msgstr "settings.xml"
+
 msgctxt "#30129"
 msgid "Log level"
 msgstr "settings.xml"
