@@ -58,7 +58,7 @@ def run_plugin():
     elif addon_args.args.cmd == "update-settings":
         update_plugin()
     else:
-        kodi.dialog_OK(text=addon_args.get_help())        
+        kodi.dialog_OK(text=addon_args.get_help())
         
     logger.debug('Advanced Kodi Launcher Plugin: Googlesearch Scraper -> exit')
 
